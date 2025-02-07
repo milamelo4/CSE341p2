@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contacts API",
-    "description": "API documentation for the Contacts project",
+    "title": "Users API",
+    "description": "API documentation for the users project",
     "version": "1.0.0"
   },
   "host": "cse341p2-mokj.onrender.com",
