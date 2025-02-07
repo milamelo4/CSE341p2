@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Users API",
-    "description": "API documentation for the users project",
+    "description": "API documentation for the users API",
     "version": "1.0.0"
   },
   "host": "cse341p2-mokj.onrender.com",

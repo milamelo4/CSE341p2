@@ -30,7 +30,10 @@ const createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    res.status(201).json({
+      message: "Contact created successfully",
+      contactId: savedUser.insertedId,
+    });
   } catch (error) {
     if (error.code === 11000) {
       // Handle duplicate email error
@@ -54,7 +57,7 @@ const updateUser = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.status(200).json(updatedUser);
+    res.status(204).send();
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ error: "Failed to update user" });
