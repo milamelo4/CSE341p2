@@ -32,8 +32,9 @@ const createUser = async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json({
       message: "Contact created successfully",
-      contactId: savedUser.insertedId,
+      userId: savedUser._id,
     });
+    
   } catch (error) {
     if (error.code === 11000) {
       // Handle duplicate email error
