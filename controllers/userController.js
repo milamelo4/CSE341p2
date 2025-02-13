@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // Get all users
 const getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find(); // Fetch all users from MongoDB
+    const users = await User.find().select("-password"); // Fetch all users from MongoDB | Exclude the password field
     res.status(200).json(users);
   } catch (error) {
     next(error);
@@ -18,7 +18,7 @@ const getUserById = async (req, res, next) => {
     return next({ status: 400, message: "Invalid user ID format" }); // Use next() to pass the error to the error handler middleware 
   }
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("-password"); // Exclude the password field
     if (!user) {
       return next({ status: 404, message: "User not found" });
     }
