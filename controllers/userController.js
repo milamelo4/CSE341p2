@@ -1,32 +1,35 @@
 const User = require("../models/userSchema");
+const mongoose = require("mongoose");
 
 // Get all users
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find(); // Fetch all users from MongoDB
     res.status(200).json(users);
   } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ error: "Failed to retrieve users" });
+    next(error);
   }
 };
 
 // Get a user by ID
-const getUserById = async (req, res) => {
+const getUserById = async (req, res, next) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return next({ status: 400, message: "Invalid user ID format" }); // Use next() to pass the error to the error handler middleware 
+  }
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(id);
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return next({ status: 404, message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
-    console.error("Error fetching user:", error);
-    res.status(500).json({ error: "Failed to retrieve user" });
+    return next(error);
   }
 };
 
 // Create a new user
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
     const newUser = new User(req.body);
     const savedUser = await newUser.save();
@@ -38,44 +41,47 @@ const createUser = async (req, res) => {
   } catch (error) {
     if (error.code === 11000) {
       // Handle duplicate email error
-      return res
-        .status(400)
-        .json({ error: "Email already exists. Please use a different email." });
+      return next({ status: 400, message: "Email already exists" });
     }
-    console.error("Error creating user:", error);
-    res.status(500).json({ error: "Failed to create user" });
+    next(error);
   }
 };
 
-
 // Update a user by ID
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return next({ status: 400, message: "Invalid user ID format" });
+  }
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedUser = await User.findById(id, req.body, {
       new: true,
       runValidators: true,
     });
     if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
+      return next({ status: 404, message: "User not found" });
     }
-    res.status(204).send();
+    res.status(204).send(); // Updated successfully 204, no content to send back
   } catch (error) {
-    console.error("Error updating user:", error);
-    res.status(500).json({ error: "Failed to update user" });
+    next(error);
   }
 };
 
 // Delete a user by ID
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) { // Check if the id is a valid MongoDB id
+    return next({ status: 400, message: "Invalid user ID" });
+  }
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const deletedUser = await User.findByIdAndDelete(id);
     if (!deletedUser) {
-      return res.status(404).json({ error: "User not found" });
+      return next({ status: 404, message: "User not found" });
     }
+
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
-    console.error("Error deleting user:", error);
-    res.status(500).json({ error: "Failed to delete user" });
+    next(error);
   }
 };
 

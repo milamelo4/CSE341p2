@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Users API",
-    "description": "API documentation for the users API",
+    "description": "API documentation for the Users API",
     "version": "1.0.0"
   },
   "host": "cse341p2-mokj.onrender.com",
@@ -15,17 +15,14 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/definitions/User" }
-                }
-              }
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/User" }
             }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       },
@@ -45,10 +42,12 @@
             "description": "Created"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request - Validation Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       }
@@ -67,17 +66,19 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/definitions/User" }
-              }
-            }
+            "schema": { "$ref": "#/definitions/User" }
+          },
+          "400": {
+            "description": "Bad Request - Invalid User ID format",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - User does not exist",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       },
@@ -102,11 +103,17 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request - Invalid User ID format",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - User does not exist",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       },
@@ -122,13 +129,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - User deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request - Invalid User ID format",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - User does not exist",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       }
@@ -145,6 +158,13 @@
         "role": { "type": "string", "enum": ["user", "admin"], "example": "user" }
       },
       "required": ["firstName", "lastName", "email", "password"]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "success": { "type": "boolean", "example": false },
+        "message": { "type": "string", "example": "Invalid user ID format. Must be a 24-character hex string." }
+      }
     }
   }
 }

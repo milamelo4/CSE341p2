@@ -6,21 +6,23 @@ const port = process.env.PORT || 3000;
 const mongoose = require("./models"); // Ensures DB connection happens before starting
 const routes = require("./routes");
 const cors = require("cors");
+const errorHandler = require("./utils/errorHandler");
 
 app.use(cors());
 
 // Middleware
 app.use(express.json());
 
-// Routes middleware
-app.use("/", routes);
-
-
-
 // Basic route to test if the server is running
 app.get("/", (req, res) => {
   res.send("Welcome to my Books API!");
 });
+
+// Routes middleware
+app.use("/", routes);
+
+// Error handler middleware
+app.use(errorHandler);
 
 // Ensure MongoDB is connected before starting the server
 mongoose.connection.once("open", () => {

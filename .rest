@@ -5,8 +5,7 @@ GET http://localhost:3000/users
 GET https://cse341p2-mokj.onrender.com/users
 
 ### Get a user by ID ###
-GET http://localhost:3000/users/67a66eaf0db50870b4789b99
-
+GET http://localhost:3000/users/67a3e09066eaf5d1cce3425
 ###
 GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
 
@@ -15,10 +14,10 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "firstName": "test2",
+  "firstName": "Lari",
   "lastName": "Two",
-  "email": "test2@example.com",
-  "password": "securepassword123"
+  "email": "lari@example.com",
+  "password": "Passwrod123!"
 }
 
 ###
@@ -33,14 +32,14 @@ Content-Type: application/json
 }
 
 ### Update a user ###
-PUT http://localhost:3000/users/67a6594b12e52fdb1e8e8bae
+PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
 Content-Type: application/json
 
 {
-  "firstName": "Mario",
-  "lastName": "Alaia",
-  "email": "marioA@example.com",
-  "password": "securepassword123"
+  "firstName": "Lari",
+  "lastName": "Alves",
+  "email": "lari@example.com",
+  "password": "Passwrod123!"
 }
 
 ###
@@ -55,7 +54,7 @@ Content-Type: application/json
 }
 
 ### Delete a user ###
-DELETE http://localhost:3000/users/67a666ec0d60f540dd34d20d
+DELETE http://localhost:3000/users/67a666ec0d60f540dd34d20
 
 ###
-DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7fc
+DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
