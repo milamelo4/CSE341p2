@@ -10,14 +10,11 @@ const errorHandler = (error, req, res, next) => {
   let statusCode = error.status || 500;
 
   // If it's a validation error from express-validator, format it properly
-  if (error.details) {
+  if (error.errors) {
     return res.status(400).json({
       success: false,
       message: "Validation failed",
-      errors: error.details.map((e) => ({
-        field: e.param, // Name of the field that caused the error
-        message: e.msg, // Error message
-      })),
+      errors: error.errors, // Ensure this matches what `validateUser` passes
     });
   }
 

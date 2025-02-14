@@ -14,10 +14,10 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "firstName": "Lari",
-  "lastName": "Two",
-  "email": "lari@example.com",
-  "password": "Passwrod123!"
+  "firstName": "Toby",
+  "lastName": "Melo",
+  "email": "toby@example.com",
+  "password": "passwrod123!"
 }
 
 ###
@@ -52,7 +52,7 @@ Content-Type: application/json
 }
 
 ### Delete a user ###
-DELETE http://localhost:3000/users/67a666ec0d60f540dd34d20
+DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
 
 ###
 DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
