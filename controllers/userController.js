@@ -50,22 +50,35 @@ const createUser = async (req, res, next) => {
 // Update a user by ID
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
+
+  // Validate MongoDB ID format
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return next({ status: 400, message: "Invalid user ID format" });
   }
+
   try {
-    const updatedUser = await User.findById(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    // Remove email from the update payload
+    const { email, ...updateFields } = req.body;
+
+    // Update only provided fields (excluding email)
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: updateFields },
+      { new: true, runValidators: true }
+    );
+
     if (!updatedUser) {
       return next({ status: 404, message: "User not found" });
     }
-    res.status(204).send(); // Updated successfully 204, no content to send back
+
+    res.status(204).send(); // No Content (Success)
   } catch (error) {
     next(error);
   }
 };
+
+
+
 
 // Delete a user by ID
 const deleteUser = async (req, res, next) => {

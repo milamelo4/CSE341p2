@@ -5,7 +5,7 @@ GET http://localhost:3000/users
 GET https://cse341p2-mokj.onrender.com/users
 
 ### Get a user by ID ###
-GET http://localhost:3000/users/67a3e09066eaf5d1cce3425
+GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
 ###
 GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
 
@@ -37,8 +37,7 @@ Content-Type: application/json
 
 {
   "firstName": "Lari",
-  "lastName": "Alves",
-  "email": "lari@example.com",
+  "lastName": "Ann",  
   "password": "Passwrod123!"
 }
 
@@ -49,7 +48,6 @@ Content-Type: application/json
 {
   "firstName": "Mario",
   "lastName": "Alaia",
-  "email": "marioA@example.com",
   "password": "securepassword123"
 }
 

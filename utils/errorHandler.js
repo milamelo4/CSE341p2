@@ -7,7 +7,7 @@ const errorHandler = (error, req, res, next) => {
     console.error(error.stack);
   }
 
-  const statusCode = error.status || 500;
+  let statusCode = error.status || 500;
   // If is a validation error, format it properly
   if (error.details) {
     return res.status(400).json({
@@ -17,6 +17,24 @@ const errorHandler = (error, req, res, next) => {
     });
   }
 
+  // handle validation errors
+  if (error.name === "ValidationError") {
+    return res.status(400).json({
+      success: false,
+      message: 'Validation error',
+      errors: Object.values(error.errors).map(e => e.message)
+    });
+  }
+
+  // handle invalid MongoDB id errors
+  if (error.name === "CastError") {
+    return res.status(400).json({
+      success: false,
+      message: `Invalid ${error.path}: ${error.value}`,
+    });
+  }
+
+  // default error handler
   res.status(statusCode).json({
     success: false,
     message: error.message || "Something went wrong!",
