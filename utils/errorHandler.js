@@ -8,25 +8,32 @@ const errorHandler = (error, req, res, next) => {
   }
 
   let statusCode = error.status || 500;
-  // If is a validation error, format it properly
+
+  // If it's a validation error from express-validator, format it properly
   if (error.details) {
     return res.status(400).json({
       success: false,
       message: "Validation failed",
-      errors: error.details.map((e) => e.msg), // Extract error messages
+      errors: error.details.map((e) => ({
+        field: e.param, // Name of the field that caused the error
+        message: e.msg, // Error message
+      })),
     });
   }
 
-  // handle validation errors
+  // Handle Mongoose validation errors
   if (error.name === "ValidationError") {
     return res.status(400).json({
       success: false,
-      message: 'Validation error',
-      errors: Object.values(error.errors).map(e => e.message)
+      message: "Validation error",
+      errors: Object.values(error.errors).map((e) => ({
+        field: e.path,
+        message: e.message,
+      })),
     });
   }
 
-  // handle invalid MongoDB id errors
+  // Handle invalid MongoDB ID errors
   if (error.name === "CastError") {
     return res.status(400).json({
       success: false,
@@ -34,7 +41,7 @@ const errorHandler = (error, req, res, next) => {
     });
   }
 
-  // default error handler
+  // Default error handler
   res.status(statusCode).json({
     success: false,
     message: error.message || "Something went wrong!",
