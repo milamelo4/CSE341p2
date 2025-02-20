@@ -3,8 +3,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "camilamelo@example.com",
-  "password": "Trabalhodeescola"
+  "email": "testing@me.com",
+  "password": "Testing123!"
 }
 
 ### Authentication - Render
@@ -12,8 +12,8 @@ POST https://cse341p2-mokj.onrender.com/auth/login
 Content-Type: application/json
 
 {
-  "email": "camilamelo@example.com",
-  "password": "Trabalhodeescola"
+  "email": "milamelo@example.com",
+  "password": "Password123!"
 }
 
 ### Get all users - Local
