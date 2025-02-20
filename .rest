@@ -1,16 +1,44 @@
-### Get all users ###
+### Authentication - Local
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "camilamelo@example.com",
+  "password": "Trabalhodeescola"
+}
+
+### Authentication - Render
+POST https://cse341p2-mokj.onrender.com/auth/login
+Content-Type: application/json
+
+{
+  "email": "camilamelo@example.com",
+  "password": "Trabalhodeescola"
+}
+
+### Get all users - Local
 GET http://localhost:3000/users
+Authorization: Bearer <ID_TOKEN_HERE>
+Content-Type: application/json
 
-###
+### Get All Users - Render
 GET https://cse341p2-mokj.onrender.com/users
+Authorization: Bearer <ID_TOKEN_HERE>
+Content-Type: application/json
 
-### Get a user by ID ###
+### Get a user by ID - Local
 GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-###
-GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Content-Type: application/json
 
-### Create a new user ###
+### Get a user by ID - Render
+GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Content-Type: application/json
+
+### Create a new user - Local
 POST http://localhost:3000/users
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
@@ -20,8 +48,9 @@ Content-Type: application/json
   "password": "passwrod123!"
 }
 
-###
+### Create a new user - Render
 POST https://cse341p2-mokj.onrender.com/users 
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
@@ -31,8 +60,9 @@ Content-Type: application/json
   "password": "securepassword123"
 }
 
-### Update a user ###
+### Update a user - Local
 PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
@@ -41,8 +71,9 @@ Content-Type: application/json
   "password": "Passwrod123!"
 }
 
-###
+### Update a user - Render
 PUT https://cse341p2-mokj.onrender.com/users/67a659d312e52fdb1e8e8bb0d
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
@@ -51,8 +82,24 @@ Content-Type: application/json
   "password": "securepassword123"
 }
 
-### Delete a user ###
+### Delete a user - Local
 DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Content-Type: application/json
+
+### Delete a user - Render
+DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
+Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Content-Type: application/json
+
 
 ###
-DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=<apikey>
+Content-Type: application/json
+
+{
+  "email": "camilamelo@example.com",
+  "password": "demo1234",
+  "returnSecureToken": true
+}
+

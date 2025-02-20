@@ -7,19 +7,22 @@ const {
   validateUserId,
   userUpdateValidationRules
 } = require("../utils/userValidation");
+const authenticateUser = require("../utils/authMiddleware");
 
 // Get all users
-router.get("/", userController.getAllUsers);
+router.get("/", authenticateUser, userController.getAllUsers);
 
 // Get user by ID
 router.get(
     "/:id", 
+    authenticateUser,
     validateUserId(), 
     userController.getUserById);
 
 // Create a new user
 router.post(
   "/",
+  authenticateUser,
   userValidationRules(),
   validateUser,
   userController.createUser
@@ -28,6 +31,7 @@ router.post(
 // Update user
 router.put(
   "/:id",
+  authenticateUser,
   validateUserId(),
   userUpdateValidationRules(),
   validateUser,
@@ -36,7 +40,8 @@ router.put(
 
 // Delete user
 router.delete(
-    "/:id", 
+    "/:id",
+    authenticateUser, 
     validateUserId(), 
     userController.deleteUser);
 
