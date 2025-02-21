@@ -97,5 +97,6 @@ GET https://cse341p2-mokj.onrender.com/auth/logout
 ###
 GET http://localhost:3000/auth/me
 Headers:
-Cookie: connect.sid=s%3AesskOEucmfNESRzQeaQjiKszbzwtfhC8.PDfvX9KMxoKu%2F%2Byz1tQR65VYwg7KtO1sJZM78CZhjyM
+Cookie: connect.sid=<PASTE_SESSION_COOKIE_HERE>
 Content-Type: application/json
+
