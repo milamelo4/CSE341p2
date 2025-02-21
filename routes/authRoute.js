@@ -14,9 +14,13 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login",
-    successRedirect: "/", // Redirect after successful login
+    successRedirect:
+      process.env.NODE_ENV === "production"
+        ? "https://cse341p2-mokj.onrender.com"
+        : "http://localhost:3000",
   })
 );
+
 
 // Get current user info
 router.get("/me", (req, res) => {

@@ -7,13 +7,13 @@ GET https://cse341p2-mokj.onrender.com/auth/google
 ### Get Current Authenticated User - Local (Session-Based)
 GET http://localhost:3000/auth/me
 Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
+Cookie: connect.sid=s%3ADeZjZSHFZpl8KB0-AvdWOGvPCzyeg6sD.mp0HhASn3zQLfq%2FgPvKsjbJCP%2Bkc%2BmSNgg57enJd22Q
 Content-Type: application/json
 
 ### Get Current Authenticated User - Render (Session-Based)
 GET https://cse341p2-mokj.onrender.com/auth/me
 Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
+Cookie: connect.sid=s%3ADeZjZSHFZpl8KB0-AvdWOGvPCzyeg6sD.mp0HhASn3zQLfq%2FgPvKsjbJCP%2Bkc%2BmSNgg57enJd22Q
 Content-Type: application/json
 
 ### Get all users - Local
