@@ -4,10 +4,15 @@ const router = express.Router();
 const userController = require("../controllers/userController");
 
 // Start Google authentication
-router.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+router.get("/google", (req, res, next) => {
+  console.log("Redirecting to Google login...");
+  passport.authenticate("google", { scope: ["profile", "email"] })(
+    req,
+    res,
+    next
+  );
+});
+
 
 // Google OAuth callback
 router.get(
