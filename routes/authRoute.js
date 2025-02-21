@@ -28,10 +28,10 @@ router.get("/me", (req, res) => {
 });
 
 // Logout route
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
   req.logout((err) => {
-    if (err) return next(err);
-    res.redirect("/");
+    if (err) return next(err); // Ensure `next` is passed correctly
+    res.redirect("/"); // Redirect after successful logout
   });
 });
 
