@@ -1,4 +1,5 @@
 require("dotenv").config(); // Load environment variables
+require("./config/passport"); // Load Passport configuration
 
 const express = require("express");
 const app = express();
@@ -7,11 +8,26 @@ const mongoose = require("./models"); // Ensures DB connection happens before st
 const routes = require("./routes");
 const cors = require("cors");
 const errorHandler = require("./utils/errorHandler");
-
-app.use(cors());
+const passport = require("passport");
+const session = require("express-session");
 
 // Middleware
+app.use(cors());
 app.use(express.json());
+
+// Configure session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "defaultSecret",
+    resave: false,
+    saveUninitialized: false,
+    
+  })
+);
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Basic route to test if the server is running
 app.get("/", (req, res) => {

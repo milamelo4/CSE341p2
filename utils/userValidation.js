@@ -13,23 +13,8 @@ const userValidationRules = () => [
     .normalizeEmail()
     .isEmail()
     .withMessage("Email is not valid"),
-
-  body("password")
-    .trim()
-    .notEmpty()
-    .withMessage("Password is required")
-    .bail() // Stop validation if empty
-    .isStrongPassword({
-      minLength: 6,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1,
-    })
-    .withMessage(
-      "Password must be at least 6 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character"
-    ),
 ];
+
 
 // validate user id
 const validateUserId = () => {
@@ -63,8 +48,6 @@ const validateUser = (req, res, next) => {
 };
 
 
-
-
 // Validate user update input
 const userUpdateValidationRules = () => [
   body("firstName")
@@ -72,34 +55,25 @@ const userUpdateValidationRules = () => [
     .trim()
     .notEmpty()
     .withMessage("First name cannot be empty"),
+
   body("lastName")
     .optional()
     .trim()
     .notEmpty()
     .withMessage("Last name cannot be empty"),
-  body("password")
-    .optional()
-    .bail()
-    .isStrongPassword({
-      minLength: 6,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1,
-    })
-    .withMessage(
-      "Password must be at least 6 characters long and include an uppercase letter, a number, and a special character"
-    ),
+
+  // Removed password validation as it's no longer relevant
   body("email")
     .optional()
-    .custom((value, { req }) => {
+    .custom(() => {
       throw new Error("Email updates are not allowed");
     }),
 ];
 
+
 module.exports = {
-    userValidationRules,
-    validateUser, 
-    validateUserId,
-    userUpdateValidationRules,   
+  userValidationRules,
+  validateUser, 
+  validateUserId,
+  userUpdateValidationRules,   
 };

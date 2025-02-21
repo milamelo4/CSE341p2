@@ -1,105 +1,101 @@
-### Authentication - Local
-POST http://localhost:3000/auth/login
+### Authentication (Google OAuth) - Local
+GET http://localhost:3000/auth/google
+
+### Authentication (Google OAuth) - Render
+GET https://cse341p2-mokj.onrender.com/auth/google
+
+### Get Current Authenticated User - Local
+GET http://localhost:3000/auth/me
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
-{
-  "email": "testing@me.com",
-  "password": "Testing123!"
-}
-
-### Authentication - Render
-POST https://cse341p2-mokj.onrender.com/auth/login
+### Get Current Authenticated User - Render
+GET https://cse341p2-mokj.onrender.com/auth/me
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
-
-{
-  "email": "milamelo@example.com",
-  "password": "Password123!"
-}
 
 ### Get all users - Local
 GET http://localhost:3000/users
 Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
-### Get All Users - Render
+### Get all users - Render
 GET https://cse341p2-mokj.onrender.com/users
 Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 ### Get a user by ID - Local
 GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 ### Get a user by ID - Render
 GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 ### Create a new user - Local
 POST http://localhost:3000/users
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
   "firstName": "Toby",
   "lastName": "Melo",
-  "email": "toby@example.com",
-  "password": "passwrod123!"
+  "email": "toby@example.com"
 }
 
 ### Create a new user - Render
-POST https://cse341p2-mokj.onrender.com/users 
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+POST https://cse341p2-mokj.onrender.com/users
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
   "firstName": "Mario",
   "lastName": "Alaia",
-  "email": "marioA@example.com",
-  "password": "securepassword123"
+  "email": "marioA@example.com"
 }
 
 ### Update a user - Local
 PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
   "firstName": "Lari",
-  "lastName": "Ann",  
-  "password": "Passwrod123!"
+  "lastName": "Ann"
 }
 
 ### Update a user - Render
 PUT https://cse341p2-mokj.onrender.com/users/67a659d312e52fdb1e8e8bb0d
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 {
   "firstName": "Mario",
-  "lastName": "Alaia",
-  "password": "securepassword123"
+  "lastName": "Alaia"
 }
 
 ### Delete a user - Local
 DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
 ### Delete a user - Render
 DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
-Authorization: Bearer <PASTE_ID_TOKEN_HERE>
+Authorization: Bearer <ID_TOKEN_HERE>
 Content-Type: application/json
 
+### Logout - Local
+GET http://localhost:3000/auth/logout
+# Description: Logs out the authenticated user.
+
+### Logout - Render
+GET https://cse341p2-mokj.onrender.com/auth/logout
+# Description: Logs out the authenticated user.
 
 ###
-POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=<apikey>
+GET http://localhost:3000/auth/me
+Headers:
+Cookie: connect.sid=s%3AesskOEucmfNESRzQeaQjiKszbzwtfhC8.PDfvX9KMxoKu%2F%2Byz1tQR65VYwg7KtO1sJZM78CZhjyM
 Content-Type: application/json
-
-{
-  "email": "camilamelo@example.com",
-  "password": "demo1234",
-  "returnSecureToken": true
-}
-

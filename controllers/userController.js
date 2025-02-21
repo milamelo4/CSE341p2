@@ -1,6 +1,6 @@
 const User = require("../models/userSchema");
 const mongoose = require("mongoose");
-const admin = require("../config/firebase");
+const admin = require("../config/passport");
 
 
 // Get all users
@@ -98,24 +98,12 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-// Login a user
-const loginUser = async (req, res, next) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ message: "Email and password are required." });
+// Get the currently authenticated user
+const getCurrentUser = (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Not authenticated" });
   }
-
-  try {
-    const user = await admin.auth().getUserByEmail(email);
-    res.status(200).json({ message: "Login successful", user });
-  } catch (error) {
-    res
-      .status(401)
-      .json({ message: "Authentication failed", error: error.message });
-  }
+  res.status(200).json({ user: req.user });
 };
 
 // Export all functions
@@ -125,5 +113,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  loginUser
+  getCurrentUser
 };
