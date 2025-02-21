@@ -8,10 +8,23 @@
   "host": "cse341p2-mokj.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
+  "securityDefinitions": {
+    "cookieAuth": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "connect.sid",
+      "description": "Session cookie used for authentication"
+    }
+  },
   "paths": {
     "/users/": {
       "get": {
         "description": "Retrieve all users",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -64,6 +77,11 @@
             "type": "string"
           }
         ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -98,6 +116,11 @@
             "schema": { "$ref": "#/definitions/UserUpdate" }
           }
         ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -124,6 +147,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "cookieAuth": []
           }
         ],
         "responses": {
@@ -160,7 +188,7 @@
         "password": { "type": "string", "example": "securepassword123" },
         "role": { "type": "string", "enum": ["user", "admin"], "example": "user" }
       },
-      "required": ["firstName", "lastName", "password"]
+      "required": ["firstName", "lastName"]
     },
     "ErrorResponse": {
       "type": "object",

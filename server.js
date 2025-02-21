@@ -21,9 +21,14 @@ app.use(
     secret: process.env.SESSION_SECRET || "defaultSecret",
     resave: false,
     saveUninitialized: false,
-    
+    cookie: {
+      httpOnly: true, // Prevents client-side JS from accessing the cookie
+      secure: process.env.NODE_ENV === "production", // Ensures cookie is only sent over HTTPS in production
+      sameSite: "lax", // Mitigates CSRF attacks
+    },
   })
 );
+
 
 // Initialize Passport
 app.use(passport.initialize());
