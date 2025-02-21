@@ -16,19 +16,23 @@ app.use(cors());
 app.use(express.json());
 
 // Configure session middleware
+const MongoStore = require("connect-mongo");
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "defaultSecret",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI, // Use your MongoDB URI for session storage
+    }),
     cookie: {
-      httpOnly: true, // Prevents client-side JS from accessing the cookie
-      secure: process.env.NODE_ENV === "production", // Ensures cookie is only sent over HTTPS in production
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Only set cookies in production
       sameSite: "lax", // Mitigates CSRF attacks
     },
   })
 );
-
 
 // Initialize Passport
 app.use(passport.initialize());
