@@ -40,7 +40,7 @@ const validateUser = (req, res, next) => {
     return next({
       status: 400,
       message: "Validation failed",
-      errors: errorMessages, // <-- FIX: Changed `details` to `errors`
+      errors: errorMessages, 
     });
   }
 

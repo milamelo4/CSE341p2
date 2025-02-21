@@ -1,42 +1,49 @@
-### Authentication (Google OAuth) - Local
+### Authentication -Google OAuth - Local
 GET http://localhost:3000/auth/google
 
-### Authentication (Google OAuth) - Render
+### Authentication -Google OAuth - Render
 GET https://cse341p2-mokj.onrender.com/auth/google
 
-### Get Current Authenticated User - Local
+### Get Current Authenticated User - Local (Session-Based)
 GET http://localhost:3000/auth/me
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
-### Get Current Authenticated User - Render
+### Get Current Authenticated User - Render (Session-Based)
 GET https://cse341p2-mokj.onrender.com/auth/me
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Get all users - Local
 GET http://localhost:3000/users
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Get all users - Render
 GET https://cse341p2-mokj.onrender.com/users
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Get a user by ID - Local
 GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Get a user by ID - Render
 GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Create a new user - Local
 POST http://localhost:3000/users
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 {
@@ -47,7 +54,8 @@ Content-Type: application/json
 
 ### Create a new user - Render
 POST https://cse341p2-mokj.onrender.com/users
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 {
@@ -58,7 +66,8 @@ Content-Type: application/json
 
 ### Update a user - Local
 PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 {
@@ -68,7 +77,8 @@ Content-Type: application/json
 
 ### Update a user - Render
 PUT https://cse341p2-mokj.onrender.com/users/67a659d312e52fdb1e8e8bb0d
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 {
@@ -78,25 +88,18 @@ Content-Type: application/json
 
 ### Delete a user - Local
 DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Delete a user - Render
 DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
-Authorization: Bearer <ID_TOKEN_HERE>
+Headers:
+Cookie: connect.sid=<SESSION_COOKIE>
 Content-Type: application/json
 
 ### Logout - Local
 GET http://localhost:3000/auth/logout
-# Description: Logs out the authenticated user.
 
 ### Logout - Render
 GET https://cse341p2-mokj.onrender.com/auth/logout
-# Description: Logs out the authenticated user.
-
-###
-GET http://localhost:3000/auth/me
-Headers:
-Cookie: connect.sid=<PASTE_SESSION_COOKIE_HERE>
-Content-Type: application/json
-
