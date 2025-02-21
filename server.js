@@ -43,6 +43,15 @@ app.get("/", (req, res) => {
   res.send("Welcome to my Books API!");
 });
 
+// test cookie
+app.get("/test-cookie", (req, res) => {
+  if (req.session) {
+    return res.json({ message: "Session exists", sessionID: req.sessionID });
+  }
+  res.json({ message: "No session found" });
+});
+
+
 // Routes middleware
 app.use("/", routes);
 
