@@ -15,16 +15,22 @@ router.get("/google", (req, res, next) => {
 
 
 // Google OAuth callback
+// Google OAuth callback
 router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login",
-    successRedirect:
-      process.env.NODE_ENV === "production"
-        ? "https://cse341p2-mokj.onrender.com"
-        : "http://localhost:3000",
-  })
+    successRedirect: process.env.NODE_ENV === "production"
+      ? "https://cse341p2-mokj.onrender.com"
+      : "http://localhost:3000",
+  }),
+  (req, res) => {
+    // Log session info to see if the session is set
+    console.log("Session set after Google login: ", req.sessionID);
+    res.redirect("/");  // Redirect after successful login
+  }
 );
+
 
 
 // Get current user info
