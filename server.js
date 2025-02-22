@@ -28,7 +28,7 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: false, // Only set cookies in production
+      secure: true, // Only set cookies in production
       sameSite: "lax", // Mitigates CSRF attacks
     },
   })
