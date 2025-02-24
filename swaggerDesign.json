@@ -5,24 +5,29 @@
     "description": "API documentation for the users API",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "https://cse341p2-mokj.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "securityDefinitions": {
-    "cookieAuth": {
+    "bearerAuth": {
       "type": "apiKey",
-      "in": "cookie",
-      "name": "connect.sid",
-      "description": "Session cookie used for authentication"
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'"
     }
   },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
   "paths": {
     "/users/": {
       "get": {
         "description": "Retrieve all users",
         "security": [
           {
-            "cookieAuth": []
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -36,29 +41,6 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "description": "Create a new user",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "User object that needs to be added",
-            "required": true,
-            "schema": { "$ref": "#/definitions/User" }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -79,7 +61,7 @@
         ],
         "security": [
           {
-            "cookieAuth": []
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -118,25 +100,14 @@
         ],
         "security": [
           {
-            "cookieAuth": []
+            "bearerAuth": []
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request - Invalid User ID format",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
-          },
-          "404": {
-            "description": "Not Found - User does not exist",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
-          }
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request - Invalid User ID format" },
+          "404": { "description": "Not Found - User does not exist" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "delete": {
@@ -151,19 +122,13 @@
         ],
         "security": [
           {
-            "cookieAuth": []
+            "bearerAuth": []
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "OK" },
+          "404": { "description": "Not Found" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     }
@@ -175,17 +140,15 @@
         "firstName": { "type": "string", "example": "John" },
         "lastName": { "type": "string", "example": "Doe" },
         "email": { "type": "string", "example": "johndoe@example.com" },
-        "password": { "type": "string", "example": "securepassword123" },
         "role": { "type": "string", "enum": ["user", "admin"], "example": "user" }
       },
-      "required": ["firstName", "lastName", "email", "password"]
+      "required": ["firstName", "lastName", "email"]
     },
     "UserUpdate": {
       "type": "object",
       "properties": {
         "firstName": { "type": "string", "example": "John" },
         "lastName": { "type": "string", "example": "Doe" },
-        "password": { "type": "string", "example": "securepassword123" },
         "role": { "type": "string", "enum": ["user", "admin"], "example": "user" }
       },
       "required": ["firstName", "lastName"]
