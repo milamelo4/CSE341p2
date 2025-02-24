@@ -1,105 +1,167 @@
-### Authentication -Google OAuth - Local
+# ### Authentication -Google OAuth - Local
+# GET http://localhost:3000/auth/google
+
+# ### Authentication -Google OAuth - Render
+# GET https://cse341p2-mokj.onrender.com/auth/google
+
+# ### Get Current Authenticated User - Local (Session-Based)
+# GET http://localhost:3000/auth/me
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Get Current Authenticated User - Render (Session-Based)
+# GET https://cse341p2-mokj.onrender.com/auth/me
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Get all users - Local
+# GET http://localhost:3000/users
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Get all users - Render
+# GET https://cse341p2-mokj.onrender.com/users
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Get a user by ID - Local
+# GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Get a user by ID - Render
+# GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
+# Headers:
+# Cookie: connect.sid=s%3ArMPpWUttiNKERP3mlGT1qM8zmIGm9jDd.qxCShAVvo4ioRAMQOARbgYn7AAmFKt9NC2K1rvIubQs
+# Content-Type: application/json
+
+# ### Create a new user - Local
+# POST http://localhost:3000/users
+# Headers:
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyNTAxOSwiZXhwIjoxNzQwNDI4NjE5fQ2OBSFiaeh6-fWNusp8huTFPQbjIX-mIiNFWd5Ufh5rg
+# Content-Type: application/json
+
+
+# {
+#   "firstName": "Toby",
+#   "lastName": "Melo",
+#   "email": "toby@example.com"
+# }
+
+# ### Create a new user - Render
+# POST https://cse341p2-mokj.onrender.com/users
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# {
+#   "firstName": "Mario",
+#   "lastName": "Alaia",
+#   "email": "marioA@example.com"
+# }
+
+# ### Update a user - Local
+# PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# {
+#   "firstName": "Lari",
+#   "lastName": "Ann"
+# }
+
+# ### Update a user - Render
+# PUT https://cse341p2-mokj.onrender.com/users/67a659d312e52fdb1e8e8bb0d
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# {
+#   "firstName": "Mario",
+#   "lastName": "Alaia"
+# }
+
+# ### Delete a user - Local
+# DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Delete a user - Render
+# DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
+# Headers:
+# Cookie: connect.sid=<SESSION_COOKIE>
+# Content-Type: application/json
+
+# ### Logout - Local
+# GET http://localhost:3000/auth/logout
+
+# ### Logout - Render
+# GET https://cse341p2-mokj.onrender.com/auth/logout
+
+
+### Google Login to Get JWT Token (Local)
 GET http://localhost:3000/auth/google
 
-### Authentication -Google OAuth - Render
+### Google Login to Get JWT Token (Render)
 GET https://cse341p2-mokj.onrender.com/auth/google
 
-### Get Current Authenticated User - Local (Session-Based)
-GET http://localhost:3000/auth/me
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
 
-### Get Current Authenticated User - Render (Session-Based)
-GET https://cse341p2-mokj.onrender.com/auth/me
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
+### Google OAuth Callback (Handled Automatically by Browser)
+# After completing the Google login in the browser (local or Render), copy the returned JWT token from the response for use in the requests below.
 
-### Get all users - Local
+
+### Get All Users (Protected Route - Local)
 GET http://localhost:3000/users
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyODI4NywiZXhwIjoxNzQwNDMxODg3fQ.HSg6Qj2dDVRTizbAYh3qEh-mosJXzzp8xPJocC_1k8Q
 
-### Get all users - Render
+### Get All Users (Protected Route - Render)
 GET https://cse341p2-mokj.onrender.com/users
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
+Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
 
-### Get a user by ID - Local
-GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
 
-### Get a user by ID - Render
-GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
-Headers:
-Cookie: connect.sid=s%3ArMPpWUttiNKERP3mlGT1qM8zmIGm9jDd.qxCShAVvo4ioRAMQOARbgYn7AAmFKt9NC2K1rvIubQs
-Content-Type: application/json
+### Get User by ID (Protected Route - Local)
+GET http://localhost:3000/users/67a3e14866eaf5d1cce34262
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyODI4NywiZXhwIjoxNzQwNDMxODg3fQ.HSg6Qj2dDVRTizbAYh3qEh-mosJXzzp8xPJocC_1k8Q
 
-### Create a new user - Local
-POST http://localhost:3000/users
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
+### Get User by ID (Protected Route - Render)
+GET https://cse341p2-mokj.onrender.com/users/<USER_ID>
+Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
+
+
+### Update User (Protected Route - Local)
+PUT http://localhost:3000/users/67a66eaf0db50870b4789b99
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyODI4NywiZXhwIjoxNzQwNDMxODg3fQ.HSg6Qj2dDVRTizbAYh3qEh-mosJXzzp8xPJocC_1k8Q
 
 {
-  "firstName": "Toby",
-  "lastName": "Melo",
-  "email": "toby@example.com"
+  "firstName": "Brittany",
+  "lastName": "Santiago"
 }
 
-### Create a new user - Render
-POST https://cse341p2-mokj.onrender.com/users
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
+### Update User (Protected Route - Render)
+PUT https://cse341p2-mokj.onrender.com/users/<USER_ID>
 Content-Type: application/json
+Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
 
 {
-  "firstName": "Mario",
-  "lastName": "Alaia",
-  "email": "marioA@example.com"
+  "firstName": "UpdatedName",
+  "lastName": "UpdatedLastName"
 }
 
-### Update a user - Local
-PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
 
-{
-  "firstName": "Lari",
-  "lastName": "Ann"
-}
+### Delete User (Protected Route - Local)
+DELETE http://localhost:3000/users/67a66f9b07933e7eb97ef794
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyODI4NywiZXhwIjoxNzQwNDMxODg3fQ.HSg6Qj2dDVRTizbAYh3qEh-mosJXzzp8xPJocC_1k8Q
 
-### Update a user - Render
-PUT https://cse341p2-mokj.onrender.com/users/67a659d312e52fdb1e8e8bb0d
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
+### Delete User (Protected Route - Render)
+DELETE https://cse341p2-mokj.onrender.com/users/<USER_ID> 
+Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
 
-{
-  "firstName": "Mario",
-  "lastName": "Alaia"
-}
 
-### Delete a user - Local
-DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
-
-### Delete a user - Render
-DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
-Headers:
-Cookie: connect.sid=<SESSION_COOKIE>
-Content-Type: application/json
-
-### Logout - Local
-GET http://localhost:3000/auth/logout
-
-### Logout - Render
-GET https://cse341p2-mokj.onrender.com/auth/logout

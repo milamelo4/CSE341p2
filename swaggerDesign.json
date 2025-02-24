@@ -5,9 +5,9 @@
     "description": "API documentation for the users API",
     "version": "1.0.0"
   },
-  "host": "cse341p2-mokj.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http"],
   "securityDefinitions": {
     "cookieAuth": {
       "type": "apiKey",

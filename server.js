@@ -28,7 +28,7 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: true, // Only set cookies in production
+      secure: process.env.NODE_ENV === "production", // Only set cookies in production
       sameSite: "lax", // Mitigates CSRF attacks
     },
   })

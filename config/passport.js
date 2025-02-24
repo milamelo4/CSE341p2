@@ -45,7 +45,7 @@ passport.use(
           });
           await user.save();
         }
-        console.log("User authenticated:", user); // Debug log
+        //console.log("User authenticated:", user);  Debug log
         return done(null, user);
       } catch (error) {
         return done(error, null);

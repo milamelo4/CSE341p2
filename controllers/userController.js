@@ -1,6 +1,6 @@
 const User = require("../models/userSchema");
 const mongoose = require("mongoose");
-const admin = require("../config/passport");
+const { OAuth2Client } = require("google-auth-library");
 
 
 // Get all users
@@ -30,24 +30,51 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-// Create a new user
+// Initialize Google OAuth2 client
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+// Create a new user after verifying Google ID token
 const createUser = async (req, res, next) => {
+  const { token } = req.body; // Token sent in request body (from Postman/Swagger)
+
+  if (!token) {
+    return res.status(400).json({ error: "Token is required" });
+  }
+
   try {
-    const newUser = new User(req.body);
-    const savedUser = await newUser.save();
-    res.status(201).json({
-      message: "Contact created successfully",
-      userId: savedUser._id,
+    // Verify Google ID token
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
-    
-  } catch (error) {
-    if (error.code === 11000) {
-      // Handle duplicate email error
-      return next({ status: 400, message: "Email already exists" });
+
+    const {
+      email,
+      given_name: firstName,
+      family_name: lastName,
+    } = ticket.getPayload();
+
+    // Check if user exists; if not, create user
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = new User({
+        email,
+        firstName,
+        lastName,
+      });
+      await user.save();
     }
+
+    res.status(201).json({
+      message: "User profile created successfully",
+      userId: user._id,
+    });
+  } catch (error) {
+    console.error("Error creating user:", error);
     next(error);
   }
 };
+
 
 // Update a user by ID
 const updateUser = async (req, res, next) => {

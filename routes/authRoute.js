@@ -1,49 +1,41 @@
 const express = require("express");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 const userController = require("../controllers/userController");
 
-// Start Google authentication
-router.get("/google", (req, res, next) => {
-  console.log("Redirecting to Google login...");
-  passport.authenticate("google", { scope: ["profile", "email"] })(
-    req,
-    res,
-    next
+// Generate JWT after successful Google authentication
+const generateToken = (user) => {
+  return jwt.sign(
+    { userId: user._id, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" } // Token expires in 1 hour
   );
-});
+};
 
+// Start Google authentication
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
-// Google OAuth callback
-// Google OAuth callback
+// Google OAuth callback - returns JWT instead of relying on sessions
 router.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-    successRedirect: process.env.NODE_ENV === "production"
-      ? "https://cse341p2-mokj.onrender.com"
-      : "http://localhost:3000",
-  }),
+  passport.authenticate("google", { session: false }),
   (req, res) => {
-    // Log session info to see if the session is set
-    console.log("Session set after Google login: ", req.sessionID);
-    res.redirect("/");  // Redirect after successful login
+    const token = generateToken(req.user);
+    res.status(200).json({
+      message: "Authentication successful",
+      token: token,
+      user: req.user,
+    });
   }
 );
 
-
-
-// Get current user info
+// Get current user info (protected route should use token verification middleware)
 router.get("/me", (req, res) => {
   userController.getCurrentUser(req, res);
-});
-
-// Logout route
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err); // Ensure `next` is passed correctly
-    res.redirect("/"); // Redirect after successful logout
-  });
 });
 
 module.exports = router;
