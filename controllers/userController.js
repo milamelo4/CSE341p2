@@ -1,7 +1,7 @@
 const User = require("../models/userSchema");
 const mongoose = require("mongoose");
-const { OAuth2Client } = require("google-auth-library");
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Get all users
 const getAllUsers = async (req, res, next) => {
@@ -30,44 +30,30 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-// Initialize Google OAuth2 client
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-// Create a new user after verifying Google ID token
+// Create a new user (manual registration)
 const createUser = async (req, res, next) => {
-  const { token } = req.body; // Token sent in request body (from Postman/Swagger)
-
-  if (!token) {
-    return res.status(400).json({ error: "Token is required" });
-  }
+  const { firstName, lastName, email, password } = req.body;
 
   try {
-    // Verify Google ID token
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
-
-    const {
-      email,
-      given_name: firstName,
-      family_name: lastName,
-    } = ticket.getPayload();
-
-    // Check if user exists; if not, create user
-    let user = await User.findOne({ email });
-    if (!user) {
-      user = new User({
-        email,
-        firstName,
-        lastName,
-      });
-      await user.save();
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already exists" });
     }
 
+    // Create and save the user
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+
+    const savedUser = await newUser.save();
+    //console.log("User registered successfully:", savedUser.password);
     res.status(201).json({
-      message: "User profile created successfully",
-      userId: user._id,
+      message: "User registered successfully",
+      userId: savedUser._id,
     });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -132,6 +118,49 @@ const getCurrentUser = (req, res) => {
   res.status(200).json({ user: req.user });
 };
 
+// Login user and generate JWT
+const loginUser = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+    //console.log("Password entered:", password);
+    //console.log("Password in DB:", user.password);
+
+    // Compare passwords
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    //console.log("Password valid:", isPasswordValid);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Generate JWT
+    const token = jwt.sign(
+      { userId: user._id, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({
+      message: "Login successful",
+      token,
+    });
+  } catch (error) {
+    console.error("Error during login:", error);
+    next(error);
+  }
+};
+
+// logout user
+const logoutUser = (req, res) => {
+  res.status(200).json({ message: "Logout successful" });
+};
+
+
 // Export all functions
 module.exports = {
   getAllUsers,
@@ -139,5 +168,7 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  getCurrentUser
+  getCurrentUser,
+  loginUser,
+  logoutUser
 };

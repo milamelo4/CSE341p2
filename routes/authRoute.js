@@ -19,7 +19,7 @@ router.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-// Google OAuth callback - returns JWT instead of relying on sessions
+// Google OAuth callback - returns JWT
 router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
@@ -37,5 +37,14 @@ router.get(
 router.get("/me", (req, res) => {
   userController.getCurrentUser(req, res);
 });
+
+
+
+
+// login user
+router.post("/login", userController.loginUser);
+
+// logout user
+router.post("/logout", userController.logoutUser);
 
 module.exports = router;

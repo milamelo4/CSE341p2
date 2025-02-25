@@ -2,9 +2,7 @@ const { body, param, validationResult } = require("express-validator");
 
 const userValidationRules = () => [
   body("firstName").trim().notEmpty().withMessage("First name is required"),
-
   body("lastName").trim().notEmpty().withMessage("Last name is required"),
-
   body("email")
     .trim()
     .notEmpty()
@@ -14,7 +12,6 @@ const userValidationRules = () => [
     .isEmail()
     .withMessage("Email is not valid"),
 ];
-
 
 // validate user id
 const validateUserId = () => {
@@ -70,10 +67,29 @@ const userUpdateValidationRules = () => [
     }),
 ];
 
+// Validation for user registration (includes password)
+const userRegistrationValidationRules = () => [
+  body("firstName").trim().notEmpty().withMessage("First name is required"),
+  body("lastName").trim().notEmpty().withMessage("Last name is required"),
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .bail()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage("Email is not valid"),
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long"),
+];
 
 module.exports = {
   userValidationRules,
   validateUser, 
   validateUserId,
-  userUpdateValidationRules,   
+  userUpdateValidationRules, 
+  userRegistrationValidationRules  
 };

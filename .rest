@@ -1,110 +1,48 @@
-# ### Authentication -Google OAuth - Local
-# GET http://localhost:3000/auth/google
+### Register New User (Local)
+POST http://localhost:3000/users/register
+Content-Type: application/json
 
-# ### Authentication -Google OAuth - Render
-# GET https://cse341p2-mokj.onrender.com/auth/google
+{
+  "firstName": "Rosa",
+  "lastName": "Castillo",
+  "email": "rosa@example.com",
+  "password": "securePassword123!"
+}
 
-# ### Get Current Authenticated User - Local (Session-Based)
-# GET http://localhost:3000/auth/me
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
+### Register New User (Render)
+POST https://cse341p2-mokj.onrender.com/auth/register
+Content-Type: application/json
+{
+  "firstName": "Toby",
+  "lastName": "Melo",
+  "email": "toby@example.com",
+  "password": "securePassword123!"
+}
+### Login User (Local)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
 
-# ### Get Current Authenticated User - Render (Session-Based)
-# GET https://cse341p2-mokj.onrender.com/auth/me
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
+{
+  "email": "rosa@example.com",
+  "password": "securePassword123!"
+}
 
-# ### Get all users - Local
-# GET http://localhost:3000/users
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
+### Login User (Render)
+POST https://cse341p2-mokj.onrender.com/auth/login
+Content-Type: application/json
 
-# ### Get all users - Render
-# GET https://cse341p2-mokj.onrender.com/users
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
+{
+  "email": "toby@example.com",
+  "password": "securePassword123!"
+}
 
-# ### Get a user by ID - Local
-# GET http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
-
-# ### Get a user by ID - Render
-# GET https://cse341p2-mokj.onrender.com/users/67a3e15c66eaf5d1cce34264
-# Headers:
-# Cookie: connect.sid=s%3ArMPpWUttiNKERP3mlGT1qM8zmIGm9jDd.qxCShAVvo4ioRAMQOARbgYn7AAmFKt9NC2K1rvIubQs
-# Content-Type: application/json
-
-# ### Create a new user - Local
-# POST http://localhost:3000/users
-# Headers:
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyNTAxOSwiZXhwIjoxNzQwNDI4NjE5fQ2OBSFiaeh6-fWNusp8huTFPQbjIX-mIiNFWd5Ufh5rg
-# Content-Type: application/json
+### Logout (Protected Route)
+POST http://localhost:3000/auth/logout
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 
-# {
-#   "firstName": "Toby",
-#   "lastName": "Melo",
-#   "email": "toby@example.com"
-# }
-
-# ### Create a new user - Render
-# POST https://cse341p2-mokj.onrender.com/users
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
-
-# {
-#   "firstName": "Mario",
-#   "lastName": "Alaia",
-#   "email": "marioA@example.com"
-# }
-
-# ### Update a user - Local
-# PUT http://localhost:3000/users/67a3e09066eaf5d1cce3425d
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
-
-# {
-#   "firstName": "Lari",
-#   "lastName": "Ann"
-# }
-
-# ### Update a user - Render
-# PUT https://cse341p2-mokj.onrender.com/users/67a659d312e52fdb1e8e8bb0d
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
-
-# {
-#   "firstName": "Mario",
-#   "lastName": "Alaia"
-# }
-
-# ### Delete a user - Local
-# DELETE http://localhost:3000/users/67afb0604388bba54bec9d5f
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
-
-# ### Delete a user - Render
-# DELETE https://cse341p2-mokj.onrender.com/users/67a66a0c8986531bac17e7f
-# Headers:
-# Cookie: connect.sid=<SESSION_COOKIE>
-# Content-Type: application/json
-
-# ### Logout - Local
-# GET http://localhost:3000/auth/logout
-
-# ### Logout - Render
-# GET https://cse341p2-mokj.onrender.com/auth/logout
-
+### Logout User (Render)
+GET https://cse341p2-mokj.onrender.com/auth/logout
 
 ### Google Login to Get JWT Token (Local)
 GET http://localhost:3000/auth/google
@@ -119,26 +57,25 @@ GET https://cse341p2-mokj.onrender.com/auth/google
 
 ### Get All Users (Protected Route - Local)
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyOTg4MiwiZXhwIjoxNzQwNDMzNDgyfQ.e8UIAfbcH1yBgNx5scfjgOySl8JvvFHnJq0yKYuTZGk
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQzOTk2MywiZXhwIjoxNzQwNDQzNTYzfQ.yuzkZ4-vZkCTX1Cj8rykchOC4gVnJG4UVmYEMMNLP8k
 ### Get All Users (Protected Route - Render)
 GET https://cse341p2-mokj.onrender.com/users
-Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 
 ### Get User by ID (Protected Route - Local)
 GET http://localhost:3000/users/67a3e14866eaf5d1cce34262
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyODI4NywiZXhwIjoxNzQwNDMxODg3fQ.HSg6Qj2dDVRTizbAYh3qEh-mosJXzzp8xPJocC_1k8Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQzOTk2MywiZXhwIjoxNzQwNDQzNTYzfQ.yuzkZ4-vZkCTX1Cj8rykchOC4gVnJG4UVmYEMMNLP8k
 
 ### Get User by ID (Protected Route - Render)
 GET https://cse341p2-mokj.onrender.com/users/<USER_ID>
-Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 
 ### Update User (Protected Route - Local)
 PUT http://localhost:3000/users/67a66eaf0db50870b4789b99
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQyODI4NywiZXhwIjoxNzQwNDMxODg3fQ.HSg6Qj2dDVRTizbAYh3qEh-mosJXzzp8xPJocC_1k8Q
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 {
   "firstName": "Brittany",
@@ -148,7 +85,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4Z
 ### Update User (Protected Route - Render)
 PUT https://cse341p2-mokj.onrender.com/users/<USER_ID>
 Content-Type: application/json
-Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 {
   "firstName": "UpdatedName",
@@ -157,11 +94,11 @@ Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
 
 
 ### Delete User (Protected Route - Local)
-DELETE http://localhost:3000/users/67a66f9b07933e7eb97ef794
-Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
+DELETE http://localhost:3000/users/<USER_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 ### Delete User (Protected Route - Render)
 DELETE https://cse341p2-mokj.onrender.com/users/<USER_ID> 
-Authorization: Bearer <PASTE_YOUR_JWT_TOKEN_HERE>
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 

@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
-const passport = require("passport");
 
 const {
   userValidationRules,
   validateUser,
   validateUserId,
-  userUpdateValidationRules
+  userUpdateValidationRules,
+  userRegistrationValidationRules
 } = require("../utils/userValidation");
 const authenticateUser = require("../utils/authMiddleware");
 
@@ -20,14 +20,6 @@ router.get(
     authenticateUser,
     validateUserId(), 
     userController.getUserById);
-
-// Create a new user
-router.post(
-  "/",
-  userValidationRules(),
-  validateUser,
-  userController.createUser
-);
 
 // Update user
 router.put(
@@ -45,5 +37,11 @@ router.delete(
     authenticateUser, 
     validateUserId(), 
     userController.deleteUser);
+
+// register user
+router.post("/register",
+   userValidationRules(), 
+   validateUser, 
+   userController.createUser);
 
 module.exports = router;
