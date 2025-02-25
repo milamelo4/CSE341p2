@@ -32,7 +32,7 @@ POST https://cse341p2-mokj.onrender.com/auth/login
 Content-Type: application/json
 
 {
-  "email": "toby@example.com",
+  "email": "rosa@example.com",
   "password": "securePassword123!"
 }
 

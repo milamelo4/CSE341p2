@@ -22,6 +22,34 @@
     }
   ],
   "paths": {
+    "/users/register": {
+      "post": {
+        "description": "Register a new user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User registration details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": { "type": "string", "example": "John" },
+                "lastName": { "type": "string", "example": "Doe" },
+                "email": { "type": "string", "example": "johndoe@example.com" },
+                "password": { "type": "string", "example": "securePassword123" }
+              },
+              "required": ["firstName", "lastName", "email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "User registered successfully" },
+          "400": { "description": "Bad Request - Validation error" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
     "/users/": {
       "get": {
         "description": "Retrieve all users",
@@ -73,12 +101,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "404": { "description": "Not Found" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "put": {
