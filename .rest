@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### Register New User (Render)
-POST https://cse341p2-mokj.onrender.com/auth/register
+POST https://cse341p2-mokj.onrender.com/users/register
 Content-Type: application/json
 {
   "firstName": "Toby",

@@ -51,9 +51,15 @@ const createUser = async (req, res, next) => {
 
     const savedUser = await newUser.save();
     //console.log("User registered successfully:", savedUser.password);
+    const token = jwt.sign(
+      { userId: savedUser._id, email: savedUser.email, role: savedUser.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
     res.status(201).json({
       message: "User registered successfully",
       userId: savedUser._id,
+      token,
     });
   } catch (error) {
     console.error("Error creating user:", error);
