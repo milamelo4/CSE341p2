@@ -9,40 +9,19 @@ const routes = require("./routes");
 const cors = require("cors");
 const errorHandler = require("./utils/errorHandler");
 const passport = require("passport");
-const session = require("express-session");
+
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Configure session middleware
-const MongoStore = require("connect-mongo");
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "defaultSecret",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI, // Use your MongoDB URI for session storage
-    }),
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Only set cookies in production
-      sameSite: "lax", // Mitigates CSRF attacks
-    },
-  })
-);
-
 // Initialize Passport
 app.use(passport.initialize());
-app.use(passport.session());
 
 // Basic route to test if the server is running
 app.get("/", (req, res) => {
   res.send("Welcome to my Books API!");
 });
-
 
 // Routes middleware
 app.use("/", routes);

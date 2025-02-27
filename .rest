@@ -57,7 +57,7 @@ GET https://cse341p2-mokj.onrender.com/auth/google
 
 ### Get All Users (Protected Route - Local)
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDQzOTk2MywiZXhwIjoxNzQwNDQzNTYzfQ.yuzkZ4-vZkCTX1Cj8rykchOC4gVnJG4UVmYEMMNLP8k
+Authorization: Bearer <JWT_TOKEN_HERE>
 ### Get All Users (Protected Route - Render)
 GET https://cse341p2-mokj.onrender.com/users
 Authorization: Bearer <JWT_TOKEN_HERE>

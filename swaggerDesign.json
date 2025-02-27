@@ -5,7 +5,7 @@
     "description": "API documentation for the users API",
     "version": "1.0.0"
   },
-  "host": "cse341p2-mokj.onrender.com",
+  "host": "c41p2-se3mokj.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "securityDefinitions": {
@@ -13,7 +13,7 @@
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
-      "description": "JWT Authorization header using the Bearer scheme. Please enter the token in the format: 'Bearer {token}'"
+      "description": "JWT Authorization header using the Bearer scheme. Please enter the token in the format: Bearer {token}"
     }
   },
   "security": [
@@ -45,19 +45,21 @@
         ],
         "responses": {
           "201": { "description": "User registered successfully" },
-          "400": { "description": "Bad Request - Validation error" },
-          "500": { "description": "Internal Server Error" }
+          "400": {
+            "description": "Bad Request - Validation error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
         }
       }
     },
     "/users/": {
       "get": {
         "description": "Retrieve all users",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": {
             "description": "OK",
@@ -70,8 +72,8 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error"
+          "500": { "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       }
@@ -87,11 +89,7 @@
             "type": "string"
           }
         ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": {
             "description": "OK",
@@ -101,8 +99,14 @@
               }
             }
           },
-          "404": { "description": "Not Found" },
-          "500": { "description": "Internal Server Error" }
+          "404": { 
+            "description": "Not Found",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": { 
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
         }
       },
       "put": {
@@ -122,16 +126,21 @@
             "schema": { "$ref": "#/definitions/UserUpdate" }
           }
         ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "204": { "description": "No Content" },
-          "400": { "description": "Bad Request - Invalid User ID format" },
-          "404": { "description": "Not Found - User does not exist" },
-          "500": { "description": "Internal Server Error" }
+          "400": { 
+            "description": "Bad Request - Invalid User ID format",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "404": { 
+            "description": "Not Found - User does not exist",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": { 
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
         }
       },
       "delete": {
@@ -144,15 +153,17 @@
             "type": "string"
           }
         ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": { "description": "OK" },
-          "404": { "description": "Not Found" },
-          "500": { "description": "Internal Server Error" }
+          "404": { 
+            "description": "Not Found", 
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": { 
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
         }
       }
     }
@@ -181,7 +192,17 @@
       "type": "object",
       "properties": {
         "success": { "type": "boolean", "example": false },
-        "message": { "type": "string", "example": "Invalid user ID format. Must be a 24-character hex string." }
+        "message": { "type": "string", "example": "Validation failed" },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": { "type": "string", "example": "email" },
+              "message": { "type": "string", "example": "Email is required" }
+            }
+          }
+        }
       }
     }
   }
