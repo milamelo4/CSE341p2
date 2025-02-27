@@ -60,7 +60,7 @@ GET http://localhost:3000/users
 Authorization: Bearer <JWT_TOKEN_HERE>
 ### Get All Users (Protected Route - Render)
 GET https://cse341p2-mokj.onrender.com/users
-Authorization: Bearer <JWT_TOKEN_HERE>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDY5MjM5OCwiZXhwIjoxNzQwNjk1OTk4fQ.bdJHueZFArLeaVFrP9Bo_Lb8tNEU6FAB7dNvpccL_7w
 
 
 ### Get User by ID (Protected Route - Local)

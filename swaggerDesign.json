@@ -5,7 +5,7 @@
     "description": "API documentation for the users API",
     "version": "1.0.0"
   },
-  "host": "c41p2-se3mokj.onrender.com",
+  "host": "cse341p2-mokj.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "securityDefinitions": {
