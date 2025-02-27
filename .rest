@@ -50,6 +50,21 @@ GET http://localhost:3000/auth/google
 ### Google Login to Get JWT Token (Render)
 GET https://cse341p2-mokj.onrender.com/auth/google
 
+###test
+POST http://localhost:3000/books
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2JkMGRkMDYwNWZjYjI2YWU1NTVhODYiLCJlbWFpbCI6InJvc2FAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MDY5NjY0NywiZXhwIjoxNzQwNzAwMjQ3fQ.aR90yC0uV_A-YozGFkXt8KZAuL6K4Uan9F11GWdpQ4I
+
+{
+  "title": "The Power of Habit",
+  "author": "Charles Duhigg",
+  "genre": "Self-Help",
+  "publishedYear": 2012,
+  "ISBN": "9780812981605",
+  "rating": 4.6,
+  "summary": "A book about how habits shape our lives and how we can change them."
+}
+
 
 ### Google OAuth Callback (Handled Automatically by Browser)
 # After completing the Google login in the browser (local or Render), copy the returned JWT token from the response for use in the requests below.
@@ -57,10 +72,10 @@ GET https://cse341p2-mokj.onrender.com/auth/google
 
 ### Get All Users (Protected Route - Local)
 GET http://localhost:3000/users
-Authorization: Bearer <JWT_TOKEN_HERE>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2JkMGRkMDYwNWZjYjI2YWU1NTVhODYiLCJlbWFpbCI6InJvc2FAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MDY5NTA5OCwiZXhwIjoxNzQwNjk4Njk4fQ.IC-cnmloM06o0-37BUTe2E8jfh39bUFqOPrXL3xQL40
 ### Get All Users (Protected Route - Render)
 GET https://cse341p2-mokj.onrender.com/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2I4ZDA1ZmUzM2FkZjEzYjNhMzMzOTAiLCJlbWFpbCI6Im1pbGFtZWxvc2Nob29sQGdtYWlsLmNvbSIsImlhdCI6MTc0MDY5MjM5OCwiZXhwIjoxNzQwNjk1OTk4fQ.bdJHueZFArLeaVFrP9Bo_Lb8tNEU6FAB7dNvpccL_7w
+Authorization: Bearer <JWT_TOKEN_HERE>
 
 
 ### Get User by ID (Protected Route - Local)
