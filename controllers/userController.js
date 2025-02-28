@@ -30,39 +30,16 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-// Create a new user (manual registration)
+// Create a new user (manual registration) Should not return a token
 const createUser = async (req, res, next) => {
-  const { firstName, lastName, email, password } = req.body;
-
   try {
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email already exists" });
-    }
+    const user = new User(req.body);
+    await user.save();
 
-    // Create and save the user
-    const newUser = new User({
-      firstName,
-      lastName,
-      email,
-      password,
-    });
-
-    const savedUser = await newUser.save();
-    //console.log("User registered successfully:", savedUser.password);
-    const token = jwt.sign(
-      { userId: savedUser._id, email: savedUser.email, role: savedUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-    res.status(201).json({
-      message: "User registered successfully",
-      userId: savedUser._id,
-      token,
-    });
+    res
+      .status(201)
+      .json({ message: "User registered successfully. Please log in." });
   } catch (error) {
-    console.error("Error creating user:", error);
     next(error);
   }
 };
