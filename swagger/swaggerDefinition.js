@@ -5,9 +5,9 @@ module.exports = {
     description: "API documentation for managing books and users",
     version: "1.0.0",
   },
-  host: "localhost:3000", // Change if needed
+  host: "cse341p2-mokj.onrender.com", // Change if needed
   basePath: "/",
-  schemes: ["http"],
+  schemes: ["https"],
   securityDefinitions: {
     bearerAuth: {
       type: "apiKey",
