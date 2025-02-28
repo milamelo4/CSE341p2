@@ -24,13 +24,12 @@ router.post(
   bookController.createBook
 );
 
-
 // Update a book by ID (protected)
 router.put(
   "/:id",
   authenticateUser,
   validateBookId(),
-  bookValidationRules(),
+  ...bookValidationRules(),
   validateBook,
   bookController.updateBook
 );

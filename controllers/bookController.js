@@ -2,29 +2,29 @@ const Book = require('../models/bookSchema');
 const mongoose = require('mongoose');
 
 const getAllBooks = async (req, res, next) => {   
-    try {
-        const books = await Book.find();
-        res.status(200).json(books);
-    } catch (error) {
-        next(error);
-    }
+  try {
+    const books = await Book.find();
+    res.status(200).json(books);
+  } catch (error) {
+    next(error);
+  }
 }
 
 // get a book by id
 const getBookById = async (req, res, next) => {
-    try {
-        const {id} = req.params;
-        if(!mongoose.Types.ObjectId.isValid(id)){
-            return next({status: 400, message: "Invalid book ID"});
-        }
-        const book = await Book.findById(id);
-        if(!book){
-            return next({status: 404, message: "Book not found"});
-        }
-        res.status(200).json(book);
-    } catch (error) {
-        next(error);
+  try {
+    const {id} = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+      return next({status: 400, message: "Invalid book ID"});
     }
+    const book = await Book.findById(id);
+    if(!book){
+      return next({status: 404, message: "Book not found"});
+    }
+    res.status(200).json(book);
+    } catch (error) {
+      next(error);
+  }
 }
 
 // Create a new book
@@ -45,7 +45,6 @@ const updateBook = async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return next({ status: 400, message: "Invalid book ID format" });
   }
-
   try {
     // Find the existing book
     const existingBook = await Book.findById(id);
@@ -75,7 +74,6 @@ const updateBook = async (req, res, next) => {
     next(error);
   }
 };
-
 
 // Delete a book by ID
 const deleteBook = async (req, res, next) => {

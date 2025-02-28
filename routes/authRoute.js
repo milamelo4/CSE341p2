@@ -9,7 +9,7 @@ const generateToken = (user) => {
   return jwt.sign(
     { userId: user._id, email: user.email },
     process.env.JWT_SECRET,
-    { expiresIn: "1h" } // Token expires in 1 hour
+    { expiresIn: "1h" } //  expires in 1 hour
   );
 };
 
@@ -32,13 +32,6 @@ router.get(
     });
   }
 );
-
-// Get current user info (protected route should use token verification middleware)
-router.get("/me", (req, res) => {
-  userController.getCurrentUser(req, res);
-});
-
-
 
 
 // login user

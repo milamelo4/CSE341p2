@@ -16,7 +16,7 @@ router.get("/", authenticateUser, userController.getAllUsers);
 router.get(
   "/:id", 
   authenticateUser,
-  validateUserId(), 
+  ...validateUserId(), 
   userController.getUserById
 );
 
@@ -24,8 +24,8 @@ router.get(
 router.put(
   "/:id",
   authenticateUser,
-  validateUserId(),
-  userUpdateValidationRules(),
+  ...validateUserId(),
+  ...userUpdateValidationRules(),
   validateUser,
   userController.updateUser
 );
@@ -34,14 +34,14 @@ router.put(
 router.delete(
   "/:id",
   authenticateUser, 
-  validateUserId(), 
+  ...validateUserId(), 
   userController.deleteUser
 );
 
 // register user
 router.post(
   "/register",
-  userValidationRules(), 
+  ...userValidationRules(), 
   validateUser, 
   userController.createUser
 );

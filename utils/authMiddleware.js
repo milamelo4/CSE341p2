@@ -11,10 +11,17 @@ const authenticateUser = (req, res, next) => {
       req.user = decoded;
       next();
     } catch (error) {
-      return res.status(401).json({ error: "Invalid or expired token" });
+      if (error.name === "TokenExpiredError") {
+        return res
+          .status(401)
+          .json({ success: false, message: "Token expired" });
+      }
+      return res.status(401).json({ success: false, message: "Invalid token" });
     }
   } else {
-    return res.status(401).json({ error: "Unauthorized: Token not provided" });
+    return res
+      .status(401)
+      .json({ success: false, message: "Unauthorized: Token not provided" });
   }
 };
 

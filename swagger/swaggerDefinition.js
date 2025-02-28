@@ -5,7 +5,7 @@ module.exports = {
     description: "API documentation for managing books and users",
     version: "1.0.0",
   },
-  host: "cse341p2-mokj.onrender.com", // Change if needed
+  host: "cse341p2-mokj.onrender.com", // Change if needed cse341p2-mokj.onrender.com
   basePath: "/",
   schemes: ["https"],
   securityDefinitions: {

@@ -35,7 +35,6 @@ const createUser = async (req, res, next) => {
   try {
     const user = new User(req.body);
     await user.save();
-
     res
       .status(201)
       .json({ message: "User registered successfully. Please log in." });
@@ -43,7 +42,6 @@ const createUser = async (req, res, next) => {
     next(error);
   }
 };
-
 
 // Update a user by ID
 const updateUser = async (req, res, next) => {
@@ -93,14 +91,6 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-// Get the currently authenticated user
-const getCurrentUser = (req, res) => {
-  if (!req.user) {
-    return res.status(401).json({ message: "Not authenticated" });
-  }
-  res.status(200).json({ user: req.user });
-};
-
 // Login user and generate JWT
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
@@ -143,7 +133,6 @@ const logoutUser = (req, res) => {
   res.status(200).json({ message: "Logout successful" });
 };
 
-
 // Export all functions
 module.exports = {
   getAllUsers,
@@ -151,7 +140,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  getCurrentUser,
   loginUser,
   logoutUser
 };
