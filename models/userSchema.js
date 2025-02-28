@@ -12,7 +12,14 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true, // Password should be required for registration
+      required: function () {
+        return !this.googleId;
+      }, // Password is required only if NOT using Google OAuth
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows multiple users with NULL googleId
     },
     firstName: {
       type: String,
@@ -37,9 +44,9 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Pre-save middleware to hash the password
+// Pre-save middleware to hash the password (only if password exists)
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next(); // Only hash if the password is new or modified
+  if (!this.isModified("password") || !this.password) return next(); // Skip hashing if no password
 
   try {
     const salt = await bcrypt.genSalt(10);
@@ -50,5 +57,4 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Export the Users model
 module.exports = mongoose.model("User", userSchema);
