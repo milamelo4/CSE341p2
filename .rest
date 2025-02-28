@@ -53,14 +53,14 @@ GET https://cse341p2-mokj.onrender.com/auth/google
 ###test
 POST http://localhost:3000/books
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2JkMGRkMDYwNWZjYjI2YWU1NTVhODYiLCJlbWFpbCI6InJvc2FAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MDY5NjY0NywiZXhwIjoxNzQwNzAwMjQ3fQ.aR90yC0uV_A-YozGFkXt8KZAuL6K4Uan9F11GWdpQ4I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2JkMGRkMDYwNWZjYjI2YWU1NTVhODYiLCJlbWFpbCI6InJvc2FAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MDc2NTQyMSwiZXhwIjoxNzQwNzY5MDIxfQ.pt2JwjeMklwqwrf1wl5FvTvk3eyiVA3gBq10B0RFI_E
 
 {
-  "title": "The Power of Habit",
+  "title": "t",
   "author": "Charles Duhigg",
   "genre": "Self-Help",
   "publishedYear": 2012,
-  "ISBN": "9780812981605",
+  "ISBN": "",
   "rating": 4.6,
   "summary": "A book about how habits shape our lives and how we can change them."
 }

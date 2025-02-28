@@ -14,7 +14,7 @@ passport.use(
           : process.env.GOOGLE_CALLBACK_URL_LOCAL,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("Google OAuth strategy called"); 
+      //console.log("Google OAuth strategy called"); 
       try {
         let user = await User.findOne({ email: profile.emails[0].value });
 

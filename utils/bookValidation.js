@@ -24,17 +24,22 @@ const validateBookId = () => [
 // Middleware to check validation results
 const validateBook = (req, res, next) => {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
+    //console.log(errors.array());  Debug log
+
     return next({
       status: 400,
       message: "Validation failed",
-      errors: errors
-        .array()
-        .map((err) => ({ field: err.param, message: err.msg })),
+      errors: errors.array().map((err) => ({
+        field: err.path || "UNKNOWN_FIELD", 
+        message: err.msg,
+      })),
     });
   }
   next();
 };
+
 
 module.exports = {
   bookValidationRules,
