@@ -1,0 +1,191 @@
+############################
+### AUTHENTICATION ROUTES ##
+############################
+
+### Login User (Local)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "rosa@example.com",
+  "password": "securePassword123!"
+}
+
+### Login User (Render)
+POST https://cse341p2-mokj.onrender.com/auth/login
+Content-Type: application/json
+
+{
+  "email": "rosa@example.com",
+  "password": "securePassword123!"
+}
+
+### Logout (Protected Route - Local)
+POST http://localhost:3000/auth/logout
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Logout User (Render)
+POST  https://cse341p2-mokj.onrender.com/auth/logout
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### GOOGLE OAuth Callback ###
+
+### Login to Get JWT Token (Local)
+GET http://localhost:3000/auth/google
+
+### Login to Get JWT Token (Render)
+GET https://cse341p2-mokj.onrender.com/auth/google
+
+############################
+###     USERS ROUTES      ##
+############################
+
+### Register New User (Local)
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "firstName": "Toby",
+  "lastName": "Melo",
+  "email": "toby@example.com",
+  "password": "securePassword123!"
+}
+
+### Register New User (Render)
+POST https://cse341p2-mokj.onrender.com/users/register
+Content-Type: application/json
+
+{
+  "firstName": "Toby",
+  "lastName": "Melo",
+  "email": "toby@example.com",
+  "password": "securePassword123!"  
+}
+
+### Get All Users (Protected Route - Local)
+GET http://localhost:3000/users
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Get All Users (Protected Route - Render)
+GET https://cse341p2-mokj.onrender.com/users
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Get User by ID (Protected Route - Local)
+GET http://localhost:3000/users/<USER_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Get User by ID (Protected Route - Render)
+GET https://cse341p2-mokj.onrender.com/users/<USER_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Update User (Protected Route - Local)
+PUT http://localhost:3000/users/<USER_ID>
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+{
+  "firstName": "UpdatedName",
+  "lastName": "UpdatedLastName"
+}
+
+### Update User (Protected Route - Render)
+PUT https://cse341p2-mokj.onrender.com/users/<USER_ID>
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+{
+  "firstName": "UpdatedName",
+  "lastName": "UpdatedLastName"
+}
+
+### Delete User (Protected Route - Local)
+DELETE http://localhost:3000/users/<USER_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Delete User (Protected Route - Render)
+DELETE https://cse341p2-mokj.onrender.com/users/<USER_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+############################
+###     BOOKS ROUTES      ##
+############################
+
+### Get All Books (Public Route - Local)
+GET http://localhost:3000/books
+
+### Get All Books (Public Route - Render)
+GET https://cse341p2-mokj.onrender.com/books
+
+### Get Book by ID (Public Route - Local)
+GET http://localhost:3000/books/<BOOK_ID>
+
+### Get Book by ID (Public Route - Render)
+GET https://cse341p2-mokj.onrender.com/books/<BOOK_ID>
+
+### Create New Book (Protected Route - Local)
+POST http://localhost:3000/books
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+{
+  "title": "The Power of Habit",
+  "author": "Charles Duhigg",
+  "genre": "Self-Help",
+  "publishedYear": 2012,
+  "ISBN": "9780812981605",
+  "rating": 4.6,
+  "summary": "A book about how habits shape our lives and how we can change them."
+}
+
+### Create New Book (Protected Route - Render)
+POST https://cse341p2-mokj.onrender.com/books
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+{
+  "title": "The Power of Habit",
+  "author": "Charles Duhigg",   
+  "genre": "Self-Help",
+  "publishedYear": 2012,  
+  "ISBN": "9780812981605",  
+  "rating": 4.6,  
+  "summary": "A book about how habits shape our lives and how we can change them."
+}
+
+### Update Book (Protected Route - Local)
+PUT http://localhost:3000/books/<BOOK_ID>
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+{
+  "title": "Atomic Habits",
+  "author": "James Clear",
+  "genre": "Self-Improvement",
+  "publishedYear": 2018,
+  "ISBN": "9780735211292",
+  "rating": 4.8,
+  "summary": "A book about making small daily changes that lead to big results."
+}
+
+### Update Book (Protected Route - Render)
+PUT https://cse341p2-mokj.onrender.com/books/<BOOK_ID>
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+{
+  "title": "The Power of Habit",
+  "author": "Charles Duhigg",
+  "genre": "Self-Help",
+  "publishedYear": 2012,  
+  "ISBN": "9780812981605",  
+  "rating": 4.6,  
+  "summary": "A book about how habits shape our lives and how we can change them."
+}
+
+### Delete Book (Protected Route - Local)
+DELETE http://localhost:3000/books/<BOOK_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+### Delete Book (Protected Route - Render)
+DELETE https://cse341p2-mokj.onrender.com/books/<BOOK_ID>
+Authorization: Bearer <JWT_TOKEN_HERE>
